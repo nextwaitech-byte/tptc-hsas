@@ -1,98 +1,57 @@
 # HSAS Java — Human Security Assessment System
 
-Angular + Spring Boot + PostgreSQL recreation of `tptc_demo`, isolated from everything already running on this PC.
+## User Credentials
 
-**Does not touch:** XAMPP Apache (:80), MySQL (:3306), the existing `tptc_demo` PHP app, or the host PostgreSQL service on **:5432**.
+The system currently provides the following demo user accounts:
 
-This stack uses its own Docker network and:
+| Email                       | Password    | Role             |
+| --------------------------- | ----------- | ---------------- |
+| `admin@tptc.go.tz`          | `Admin@123` | Super Admin      |
+| `officer.kigoma@tptc.go.tz` | `Admin@123` | Post Officer     |
+| `security@tptc.go.tz`       | `Admin@123` | Security Officer |
 
-| Service | Port on this PC | Notes |
-|---|---|---|
-| Angular frontend | **4200** | http://localhost:4200 |
-| Spring Boot API | **8088** | http://localhost:8088/api/v1 |
-| PostgreSQL (Docker only) | **5433** | database `tptc_hsas` — not the host Postgres |
+Authentication is implemented using **JWT (JSON Web Tokens)** rather than PHP sessions.
 
-## Run from GitHub (any PC)
+## Programming Languages
 
-GitHub stores the code. It does **not** host the live HSAS website. To run the system, clone and start Docker:
+* **Java** — Backend development
+* **TypeScript** — Frontend development with Angular
+* **HTML5** — Frontend structure
+* **CSS** — Frontend styling
+* **SQL** — Database operations and queries
 
-```powershell
-git clone https://github.com/nextwaitech-byte/tptc-hsas.git
-cd tptc-hsas
-docker compose up --build
-```
+## Frameworks & Technologies
 
-Then open **http://localhost:4200** on that computer.
+### Frontend
 
-A public internet URL (for other people without Docker) needs a server such as a VPS, Railway, or Render — not GitHub Pages.
+* **Angular 19**
+* **TypeScript**
+* Angular SPA architecture
 
-## Start (this PC)
+### Backend
 
-Install Docker Desktop. From this folder:
+* **Java**
+* **Spring Boot 3.4**
+* Spring Web
+* Spring Security
+* Spring Data JPA
+* Spring Validation
+* RESTful API architecture
 
-```powershell
-cd C:\xampp\htdocs\tptc_java
-docker compose up --build
-```
+### Authentication & Security
 
-Wait until `tptc_java_api` and `tptc_java_web` are healthy, then open:
+* **JWT Authentication**
+* **Spring Security**
+* Role-based access control
 
-**http://localhost:4200**
+### Database
 
-Login (same demo accounts as `tptc_demo`):
+* **PostgreSQL 16**
+* **Flyway** for database migrations
+* **JPA/Hibernate** for database persistence
 
-| Email | Password | Role |
-|---|---|---|
-| admin@tptc.go.tz | Admin@123 | Super Admin |
-| officer.kigoma@tptc.go.tz | Admin@123 | Post Officer |
-| security@tptc.go.tz | Admin@123 | Security Officer |
+### Development & Deployment
 
-Stop without deleting data:
-
-```powershell
-docker compose stop
-```
-
-Remove only this project's containers/volume (still does not touch host Postgres):
-
-```powershell
-docker compose down
-```
-
-## How the parts talk
-
-```
-Browser (Angular :4200)
-    -> HTTP JSON  /api/v1/*
-Spring Boot (Java :8088)
-    -> JDBC
-PostgreSQL Docker (:5433 -> 5432 inside container)
-```
-
-The frontend never talks to the database. JWT is used instead of PHP sessions.
-
-## Frameworks
-
-- Frontend: **Angular 19**
-- Backend: **Spring Boot 3.4** (Web, Security, Data JPA, Validation)
-- DB migrations: **Flyway**
-- Database: **PostgreSQL 16** (Docker)
-
-## Local frontend against Docker API
-
-If the API is already up and you only want to work on Angular:
-
-```powershell
-cd frontend
-npm start
-```
-
-`proxy.conf.json` forwards `/api` to `http://localhost:8088`.
-
-## Project layout
-
-```
-backend/     Spring Boot REST API
-frontend/    Angular SPA
-docker-compose.yml
-```
+* **Docker**
+* **Docker Compose**
+* Git / GitHub
