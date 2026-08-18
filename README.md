@@ -12,7 +12,21 @@ This stack uses its own Docker network and:
 | Spring Boot API | **8088** | http://localhost:8088/api/v1 |
 | PostgreSQL (Docker only) | **5433** | database `tptc_hsas` — not the host Postgres |
 
-## Start (recommended)
+## Run from GitHub (any PC)
+
+GitHub stores the code. It does **not** host the live HSAS website. To run the system, clone and start Docker:
+
+```powershell
+git clone https://github.com/nextwaitech-byte/tptc-hsas.git
+cd tptc-hsas
+docker compose up --build
+```
+
+Then open **http://localhost:4200** on that computer.
+
+A public internet URL (for other people without Docker) needs a server such as a VPS, Railway, or Render — not GitHub Pages.
+
+## Start (this PC)
 
 Install Docker Desktop. From this folder:
 
