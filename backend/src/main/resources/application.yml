@@ -1,0 +1,37 @@
+server:
+  port: ${SERVER_PORT:8088}
+
+spring:
+  application:
+    name: hsas-api
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/tptc_hsas}
+    username: ${SPRING_DATASOURCE_USERNAME:tptc_app}
+    password: ${SPRING_DATASOURCE_PASSWORD:tptc_java_local_only}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: Africa/Dar_es_Salaam
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+
+app:
+  name: Human Security Assessment System
+  short-name: HSAS
+  cors-origins: ${APP_CORS_ORIGINS:http://localhost:4200,http://127.0.0.1:4200}
+  jwt:
+    secret: ${JWT_SECRET:tptc-java-local-dev-secret-change-in-production-32b}
+    expiration-ms: 86400000
+  demo-password: Admin@123

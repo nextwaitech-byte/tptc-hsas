@@ -1,0 +1,62 @@
+name: tptc-java
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: tptc_java_postgres
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: tptc_hsas
+      POSTGRES_USER: tptc_app
+      POSTGRES_PASSWORD: tptc_java_local_only
+    volumes:
+      - tptc_java_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tptc_app -d tptc_hsas"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks:
+      - tptc_java_net
+
+  backend:
+    build:
+      context: ./backend
+    container_name: tptc_java_api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8088:8088"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/tptc_hsas
+      SPRING_DATASOURCE_USERNAME: tptc_app
+      SPRING_DATASOURCE_PASSWORD: tptc_java_local_only
+      SERVER_PORT: "8088"
+      JWT_SECRET: tptc-java-local-dev-secret-change-in-production-32b
+      APP_CORS_ORIGINS: http://localhost:4200,http://127.0.0.1:4200
+    networks:
+      - tptc_java_net
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: tptc_java_web
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "4200:80"
+    networks:
+      - tptc_java_net
+
+volumes:
+  tptc_java_pgdata:
+
+networks:
+  tptc_java_net:
+    name: tptc_java_net
+    driver: bridge

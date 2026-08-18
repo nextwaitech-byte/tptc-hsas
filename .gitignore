@@ -1,0 +1,13 @@
+# Isolated TPTC Java stack — do not commit secrets or build output
+.env
+**/target/
+**/node_modules/
+**/.angular/
+**/dist/
+**/.idea/
+**/.vscode/
+*.iml
+*.log
+.DS_Store
+Thumbs.db
+backend/.mvn/wrapper/maven-wrapper.jar

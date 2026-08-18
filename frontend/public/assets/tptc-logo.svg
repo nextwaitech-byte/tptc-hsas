@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="TPTC">
+  <defs>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f4d03f"/>
+      <stop offset="45%" stop-color="#f8f1c4"/>
+      <stop offset="100%" stop-color="#c9a227"/>
+    </linearGradient>
+    <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#124a78"/>
+      <stop offset="100%" stop-color="#071b33"/>
+    </linearGradient>
+    <clipPath id="shield">
+      <path d="M80 34l34 10v28c0 22-14 38-34 48-20-10-34-26-34-48V44z"/>
+    </clipPath>
+  </defs>
+  <circle cx="80" cy="80" r="76" fill="url(#ring)"/>
+  <circle cx="80" cy="80" r="68" fill="url(#face)"/>
+  <circle cx="80" cy="80" r="62" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.2"/>
+  <g clip-path="url(#shield)">
+    <rect x="40" y="30" width="80" height="90" fill="#1eb53a"/>
+    <path d="M46 118L122 34" stroke="#00a3dd" stroke-width="38"/>
+    <path d="M46 118L122 34" stroke="#fcd116" stroke-width="22"/>
+    <path d="M46 118L122 34" stroke="#000" stroke-width="12"/>
+  </g>
+  <path d="M80 34l34 10v28c0 22-14 38-34 48-20-10-34-26-34-48V44z" fill="none" stroke="#f4d03f" stroke-width="2.4"/>
+  <text x="80" y="148" text-anchor="middle" font-family="Outfit, Arial, sans-serif" font-size="13" font-weight="800" fill="#f8f1c4" letter-spacing="3">TPTC</text>
+</svg>
